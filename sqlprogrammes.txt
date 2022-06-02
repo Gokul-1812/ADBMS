@@ -1,0 +1,754 @@
+1
+
+---------------------------------------------------------------------------PROGRAM 1------------------------------------------------------------------------------
+
+DDL COMMANDS:
+---------------------
+
+
+SQL> CREATE TABLE Department(RollNo NUMBER(10) NOT NULL, Name VARCHAR(10) NOT NULL,
+ Course VARCHAR(20), Year NUMBER(5), PRIMARY KEY(RollNo));
+
+Table created.
+
+
+
+
+SQL>  INSERT INTO Student VALUES(01, 'Ajay', 'MCA', 2021);
+1 row created.
+
+SQL>  INSERT INTO Student VALUES(02, 'Gokul', 'MCA', 2021);
+1 row created.
+
+SQL>  INSERT INTO Student VALUES(03, 'Jyothish', 'Btech', 2022);
+1 row created.
+
+
+
+SQL> SELECT * FROM Student;
+
+    ROLLNO    NAME       COURSE                     YEAR
+    ----------    ----------    --------------------         ----------
+         1         Ajay         MCA                          2022
+         2         Gokul       MCA                          2023
+         3        Jyothish    Btech                        2021
+
+
+
+SQL> ALTER TABLE Student ADD Address VARCHAR(50)
+Table altered.
+
+SQL> SELECT * FROM Student;
+
+    ROLLNO   NAME        COURSE                     YEAR		ADDRESS
+----------       ----------     --------------------          -------------		--------------------------------------------------
+
+         1	    Ajay           MCA                          2022
+         2       Gokul          MCA                          2023
+         3 	   Jyothish      Btech                        2021
+
+
+SQL> TRUNCATE TABLE Student;
+Table truncated.
+
+SQL> DROP TABLE Student;
+Table dropped.
+
+
+---------------------------------------------------------------------------PROGRAM 2------------------------------------------------------------------------------
+
+DML COMMANDS:
+-----------------------
+
+
+
+SQL> CREATE TABLE Employee(EmployeeID VARCHAR(10) NOT NULL, EmployeeName VARCHAR
+(20) NOT NULL ,Department VARCHAR(20), Salary NUMBER(20));
+
+Table created.
+
+
+SQL> CREATE TABLE Depatment(DeptID VARCHAR(10) NOT NULL, DeptName VARCHAR
+  2  (20) NOT NULL , HOD VARCHAR(20));
+
+Table created.
+
+
+SQL> INSERT INTO Employee VALUES('M21CA1', 'Ajay', 'D21', 25000);
+1 row created.
+
+SQL> INSERT INTO Employee VALUES('M21CA2', 'Sarath', 'D22', 26000);
+1 row created.
+
+SQL> INSERT INTO Employee VALUES('M21CA3', 'Jyothish', 'D21', 24000);
+1 row created.
+
+
+
+SQL> INSERT INTO Depatment VALUES('D21', 'Design', 'Sara');
+1 row created.
+
+
+SQL> INSERT INTO Depatment VALUES('D22', 'Testing', 'Anandh');
+1 row created.
+
+
+
+
+SQL> ALTER TABLE Employee ADD PRIMARY KEY(EmployeeID);
+Table altered.
+
+
+SQL> Alter table depatment add primary key (deptid);
+Table altered
+
+
+SQL> Alter table employee add foreign key(department) references depatment(deptid);
+Table altered.
+
+
+SQL> Update depatment set deptname = 'Prod' where deptid='D23';
+1 row updated.
+
+SQL> Delete employee where employeeid='M21CA5';
+1row deleted.
+
+
+SQL> SELECT * FROM Employee;
+
+EMPLOYEEID    EMPLOYEENAME         DEPARTMENT               SALARY
+----------           --------------------          --------------------           ----------
+M21CA1           Ajay                           D21                            25000
+M21CA2           Sarath                        D22                            26000
+M21CA3           Jyothish                     D21                            24000
+M21CA4           Sajad                          D23                            24000
+M21CA5           Ubaise                        D23                            34000
+
+
+
+SQL> SELECT * FROM Depatment;
+
+DEPTID     DEPTNAME             HOD
+---------- -------------------- --------------------
+D21        Design               Sara
+D22        Testing              Anandh
+D23        Deployment           Jason
+
+---------------------------------------------------------------------------PROGRAM 3------------------------------------------------------------------------------
+
+TCL COMMANDS:
+---------------------
+
+
+SQL> SELECT * FROM Employee;
+
+EMPLOYEEID   EMPLOYEENAME         DEPARTMENT               SALARY
+----------          --------------------          --------------------            ----------
+M21CA1          Ajay                           D21                             25000
+M21CA2          Sarath                        D22                             26000
+M21CA3          Jyothish                     D21                             24000
+M21CA4          Sajad                          D23                             24000
+M21CA5          Ubaise                        D23                             34000
+M21CA6          Anu                            D21                             27000
+
+6 rows selected.
+
+SQL> SAVEPOINT h;
+Savepoint created.
+
+SQL> INSERT INTO Employee VALUES('M21CA7', 'An', 'D21', 27000);
+1 row created.
+
+
+SQL> SELECT * FROM Employee;
+
+EMPLOYEEID   EMPLOYEENAME         DEPARTMENT               SALARY
+----------          --------------------          --------------------            ----------
+M21CA1          Ajay                           D21                             25000
+M21CA2          Sarath                        D22                             26000
+M21CA3          Jyothish                     D21                             24000
+M21CA4          Sajad                          D23                             24000
+M21CA5          Ubaise                        D23                             34000
+M21CA6          Anu                            D21                             27000
+M21CA7          An                              D21                             27000
+
+SQL> rollback to h;
+Rollback complete.
+
+SQL> SELECT * FROM Employee;
+
+EMPLOYEEID     EMPLOYEENAME         DEPARTMENT               SALARY
+----------            --------------------          --------------------           ----------
+M21CA1            Ajay                           D21                             25000
+M21CA2            Sarath                        D22                             26000
+M21CA3           Jyothish                      D21                             24000
+M21CA4           Sajad                           D23                            24000
+M21CA5           Ubaise                         D23                            34000
+M21CA6           Anu                             D21                            27000
+
+6 rows selected.
+
+SQL> INSERT INTO Employee VALUES('M21CA7', 'Au', 'D21', 27000);
+1 row created.
+
+SQL> savepoint j;
+Savepoint created.
+
+SQL> rollback to h;
+Rollback complete.
+
+
+SQL> SELECT * FROM Employee;
+
+EMPLOYEEID    EMPLOYEENAME         DEPARTMENT               SALARY
+----------           --------------------          --------------------            ----------
+M21CA1           Ajay                           D21                             25000
+M21CA2           Sarath                        D22                             26000
+M21CA3          Jyothish                      D21                             24000
+M21CA4          Sajad                           D23                             24000
+M21CA5          Ubaise                         D23                             34000
+M21CA6          Anu                             D21                             27000
+
+6 rows selected.
+
+
+
+
+
+----------------------------------------------------------------------------- PROGRAM 4 ----------------------------------------------------------------------------
+
+
+DCL COMMANDS:
+----------------------
+
+SQL> create user gvs identified by gvs;
+User created.
+
+SQL> grant create session to gvs;
+Grant succeeded.
+
+
+SQL> connect system
+Enter password:
+Connected.
+
+
+SQL> grant all on Employee to gvs;
+Grant succeeded.
+
+SQL> connect gvs
+Enter password:
+Connected.
+
+
+SQL> select * from system.Employee;
+
+EMPLOYEEID EMPLOYEENAME         DEPARTMENT               SALARY
+----------        --------------------          --------------------           ----------
+M21CA1        Ajay                           D21                            25000
+M21CA2        Sarath                        D22                            26000
+M21CA3       Jyothish                      D21                            24000
+M21CA4       Sajad                           D23                            24000
+M21CA5       Ubaise                         D23                            34000
+M21CA6       Anu                             D21                            27000
+
+6 rows selected.
+
+
+
+------------------------------------------------------------------------ALTERNATE-------------------------------------------------------------------------------
+
+SQL> DESC Employee
+ Name                                           Null?             Type
+ -----------------------------------------   --------           ----------------------------
+
+ EMPLOYEEID                                NOT NULL     VARCHAR2(10)
+ EMPLOYEENAME                           NOT NULL     VARCHAR2(20)
+ DEPARTMENT                                                    VARCHAR2(20)
+ SALARY                                                            NUMBER(20)
+
+SQL> GRANT SELECT, INSERT ON Employee to gvs;
+Grant succeeded.
+
+SQL> connect gvs
+Enter password:
+Connected.
+
+SQL> SELECT * FROM system.Employee;
+
+EMPLOYEEID 	 EMPLOYEENAME         DEPARTMENT               SALARY
+----------        	 --------------------          --------------------           ----------
+M21CA1    	 Ajay                 	     D21                             25000
+M21CA2     	 Sarath                        D22                             26000
+M21CA3    	Jyothish                      D21                             24000
+M21CA4     	Sajad                           D23                            24000
+M21CA5     	Ubaise                         D23                            34000
+M21CA6     	Anu                             D21                            27000
+
+6 rows selected.
+
+SQL> connect system
+Enter password:
+Connected.
+
+SQL> REVOKE INSERT, SELECT ON Employee FROM gvs;
+
+Revoke succeeded.
+
+SQL> connect gvs
+Enter password:
+Connected.
+
+
+SQL> SELECT * FROM system.Employee;
+SELECT * FROM system.Employee
+                     *
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+PASSWORD UPDATION QUERY
+
+ALTER USER system IDENTIFIED BY password ceo;
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------PROGRAM 5------------------------------------------------------------------------------
+
+
+
+SQL>  CREATE TABLE Emp1(ID NUMBER(10) NOT NULL, Name VARCHAR(10) NOT NULL, Age N
+UMBER(5), HomeTown VARCHAR(20), Salary NUMBER(10));
+
+Table created.
+
+SQL> INSERT INTO Emp1 VALUES(1, 'Ramesh', 32, 'Ahmedabad', 20000);
+1 row created.
+
+SQL> INSERT INTO Emp1 VALUES(2, 'Khilar', 25, 'Delhi', 15000);
+1 row created.
+
+SQL> INSERT INTO Emp1 VALUES(3, 'Kaushik', 23, 'Kota', 20000);
+
+1 row created.
+
+SQL> INSERT INTO Emp1 VALUES(4, 'Chaitali', 25, 'Mumbai', 25000);
+1 row created.
+
+SQL> INSERT INTO Emp1 VALUES(5, 'Hardik', 22, 'Bhopal', 85000);
+1 row created.
+
+SQL> INSERT INTO Emp1 VALUES(6, 'Komal', 24, 'MP', 45000);
+1 row created.
+
+SQL> INSERT INTO Emp1 VALUES(7, 'Muffy', 23, 'Indore', 100000);
+1 row created.
+
+SQL> INSERT INTO Emp1 VALUES(8, 'Rohit', 24, 'Delhi', 60000);
+1 row created.
+
+SQL> INSERT INTO Emp1 VALUES(9, 'Ramu', 23, 'Ahmedabad', 50000);
+1 row created.
+
+SQL> INSERT INTO Emp1 VALUES(10, 'Shamli', 23, 'Mumbai', 10000);
+1 row created.
+
+SQL> select * from Emp1
+
+        ID NAME         AGE        HOMETOWN                 	SALARY
+---------- ----------    ----------   -------------------- 		----------
+         1 Ramesh     32         	Ahmedabad            	     	20000
+         2 Khilar        25 	Delhi                     		15000
+         3 Kaushik     23 	Kota                      		20000
+         4 Chaitali     25 	Mumbai                    	25000
+         5 Hardik       22 	Bhopal                    	85000
+         6 Komal       24 	MP                        		45000
+         7 Muffy        23 	Indore                   		100000
+         8 Rohit        24 	Delhi                     		60000
+         9 Ramu        23 	Ahmedabad                 	50000
+        10 Shamli      23 	Mumbai                    	10000
+
+10 rows selected.
+
+SQL> select * from Emp1 where id=4;
+
+        ID     NAME          AGE 	    HOMETOWN              SALARY
+----------    ----------       ----------  --------------------        ----------
+         4     Chaitali       25          Mumbai                    25000
+
+SQL> select distinct HomeTown from Emp1;
+
+HOMETOWN
+--------------------
+Bhopal
+Ahmedabad
+Delhi
+Kota
+Mumbai
+MP
+Indore
+
+7 rows selected.
+
+SQL> select count(salary) from Emp1;
+
+COUNT(SALARY)
+-------------
+           10
+
+---------------------------------------------------------------------------PROGRAM 6------------------------------------------------------------------------------
+
+SQL> CREATE TABLE Emplo(ID NUMBER(10) NOT NULL, First_Name VARCHAR(10) NOT NULL,
+ Last_Name VARCHAR(10), Department VARCHAR(20), Location VARCHAR(20), Salary NUM
+BER(10));
+
+Table created.
+
+SQL> ed GokulMCA15
+
+SQL> INSERT INTO Emplo VALUES(1, 'Harshad', 'Kuwar', 'Marketing', 'Pune', 10000)
+;
+
+1 row created.
+
+SQL> INSERT INTO Emplo VALUES(2, 'Anurag', 'Rajput', 'IT', 'Mumbai', 20000);
+
+1 row created.
+
+SQL> INSERT INTO Emplo VALUES(3, 'Chaitali', 'Tarle', 'IT', 'Chennai', 30000);
+
+1 row created.
+
+SQL> INSERT INTO Emplo VALUES(4, 'Pranjal', 'Patil', 'IT', 'Chennai', 25000);
+
+1 row created.
+
+SQL> INSERT INTO Emplo VALUES(5, 'Suraj', 'Tripati', 'Marketing', 'Pune', 15000)
+;
+
+1 row created.
+
+SQL> INSERT INTO Emplo VALUES(6, 'Roshini', 'Jadhav', 'Finance', 'Banglore', 200
+00);
+
+1 row created.
+
+SQL> INSERT INTO Emplo VALUES(7, 'Sandhya', 'Jain', 'Finance', 'Banglore', 20000
+);
+
+1 row created.
+
+SQL> select * from Emplo;
+
+        ID FIRST_NAME LAST_NAME  DEPARTMENT           LOCATION 	SALARY
+---------- ---------- ---------- -------------------- -----------------
+----------
+         1 Harshad    Kuwar      Marketing            Pune
+     10000
+
+         2 Anurag     Rajput     IT                   Mumbai
+     20000
+
+         3 Chaitali   Tarle      IT                   Chennai
+     30000
+
+         4 Pranjal    Patil      IT                   Chennai
+     25000
+
+         5 Suraj      Tripati    Marketing            Pune
+     15000
+
+         6 Roshini    Jadhav     Finance              Banglore
+     20000
+
+         7 Sandhya    Jain       Finance              Banglore
+     20000
+
+
+7 rows selected.
+
+SQL> select * from Emplo where department='IT' and location='Chennai';
+
+        ID FIRST_NAME LAST_NAME  DEPARTMENT           LOCATION
+---------- ---------- ---------- -------------------- --------------------
+    SALARY
+----------
+         3 Chaitali   Tarle      IT                   Chennai
+     30000
+
+         4 Pranjal    Patil      IT                   Chennai
+     25000
+
+
+SQL> select * from Emplo where department='IT' or location='Chennai';
+
+        ID FIRST_NAME LAST_NAME  DEPARTMENT           LOCATION
+---------- ---------- ---------- -------------------- --------------------
+    SALARY
+----------
+         2 Anurag     Rajput     IT                   Mumbai
+     20000
+
+         3 Chaitali   Tarle      IT                   Chennai
+     30000
+
+         4 Pranjal    Patil      IT                   Chennai
+     25000
+
+
+
+SQL> select First_Name as EMP_FN, Location as Address from Emplo;
+
+EMP_FN     ADDRESS
+---------- --------------------
+Harshad    Pune
+Anurag     Mumbai
+Chaitali   Chennai
+Pranjal    Chennai
+Suraj      Pune
+Roshini    Banglore
+Sandhya    Banglore
+
+7 rows selected.
+
+
+SQL> select * from Emplo where First_Name Like 'S%';
+
+        ID FIRST_NAME LAST_NAME  DEPARTMENT           LOCATION
+---------- ---------- ---------- -------------------- --------------------
+    SALARY
+----------
+         5 Suraj      Tripati    Marketing            Pune
+     15000
+
+         7 Sandhya    Jain       Finance              Banglore
+     20000
+
+SQL> select sum(salary), location from Emplo Group by location;
+
+SUM(SALARY) LOCATION
+----------- --------------------
+      20000 Mumbai
+      25000 Pune
+      55000 Chennai
+      40000 Banglore
+
+
+SQL> select sum(salary), location from Emplo Group by location Having sum(salary
+)>10000;
+
+SUM(SALARY) LOCATION
+----------- --------------------
+      20000 Mumbai
+      25000 Pune
+      55000 Chennai
+      40000 Banglore
+
+SQL> select  * from Emplo Order by First_Name ASC;
+
+        ID FIRST_NAME LAST_NAME  DEPARTMENT           LOCATION
+---------- ---------- ---------- -------------------- --------------------
+    SALARY
+----------
+         2 Anurag     Rajput     IT                   Mumbai
+     20000
+
+         3 Chaitali   Tarle      IT                   Chennai
+     30000
+
+         1 Harshad    Kuwar      Marketing            Pune
+     10000
+
+         4 Pranjal    Patil      IT                   Chennai
+     25000
+
+         6 Roshini    Jadhav     Finance              Banglore
+     20000
+
+         7 Sandhya    Jain       Finance              Banglore
+     20000
+
+
+         5 Suraj      Tripati    Marketing            Pune
+     15000
+
+
+---------------------------------------------------------------------------PROGRAM 7------------------------------------------------------------------------------
+
+CREATE TABLE Students(StudentID NUMBER(10) NOT NULL, StudentName VARCHAR(10) NOT NULL, Marks NUMBER(10));
+
+SQL> insert into Students values(1, 'Sanjay', 64);
+
+1 row created.
+
+SQL> insert into Students values(2, 'Varun', 72);
+
+1 row created.
+
+SQL> insert into Students values(2, 'Akash', 45);
+
+1 row created.
+
+SQL> insert into Students values(4, 'Rohit', 45);
+
+1 row created.
+
+SQL> insert into Students values(5, 'Anjali', 92);
+
+
+
+1 row created.
+
+SQL> insert into Students values(6, 'Ammu', 95);
+
+1 row created.
+
+SQL> insert into Students values(7, 'Rahul', 80);
+
+1 row created.
+
+SQL> insert into Students values(8, 'Prathibha', 62);
+
+1 row created.
+
+SQL> insert into Students values(9, 'Ravi', 75);
+
+1 row created.
+
+SQL> insert into Students values(10, 'Plukit', 76);
+
+1 row created.
+
+SQL> select count(marks) from stud whose marks>75;
+
+COUNT(MARKS)
+-------------------
+          5
+
+SQL> select avg(marks) from students;
+
+AVG(MARKS)
+-----------------
+      74.7
+
+SQL> select min(marks) from students;
+
+MIN(MARKS)
+--------------
+    45
+
+SQL> select max(marks) from students;
+
+MAX(MARKS)
+---------------
+      95
+
+
+---------------------------------------------------------------------------PROGRAM 8------------------------------------------------------------------------------
+
+SQL> CREATE TABLE Sailers(SID NUMBER(10) NOT NULL, SName VARCHAR(10) NOT NULL, Rating NUMBER(10), Age NUM
+BER(10));
+
+
+
+SQL> create table reserve (sid int, bid int, day date, foreign key (sid) references sailor(sid)foreign key(bid) references boats(bid));
+create table reserve (sid int, bid int, day date, foreign key (sid) references s
+ailor(sid)foreign key(bid) references boats(bid))
+
+
+SQL> insert into reserves values(22, 101, to_date('10/10/98','dd/mm/yy'));
+
+1 row created.
+
+SQL> insert into reserves values(22, 102, to_date('10/10/98','dd/mm/yy'));
+
+1 row created.
+
+SQL> insert into reserves values(22, 103, to_date('10/8/98','dd/mm/yy'));
+
+1 row created.
+
+SQL> insert into reserves values(22, 104, to_date('01/7/98','dd/mm/yy'));
+
+1 row created.
+
+SQL> insert into reserves values(31, 102, to_date('11/10/98','dd/mm/yy'));
+
+1 row created.
+
+SQL> insert into reserves values(31, 103, to_date('11/6/98','dd/mm/yy'));
+
+1 row created.
+
+SQL> insert into reserves values(31, 104, to_date('31/12/98','dd/mm/yy'));
+
+1 row created.
+
+SQL> insert into reserves values(64, 101, to_date('9/5/98','dd/mm/yy'));
+
+1 row created.
+
+SQL> insert into reserves values(64, 102, to_date('9/8/98','dd/mm/yy'));
+
+1 row created.
+
+SQL> insert into reserves values(74, 103, to_date('9/8/98','dd/mm/yy'));
+
+1 row created.
+
+
+
+
+SQL> select distinct sname from Sailors;
+
+SNAME
+--------------------
+Rusty
+Lubber
+Brutus
+Andy
+Art
+Bob
+Dustin
+Zorba
+Horatio
+
+9 rows selected.
+
+SQL> select * from sailors where sid in(select sid from Reserves where bid=101);
+
+
+       SID SNAME                    RATING        AGE
+---------- -------------------- ---------- ----------
+        22 Dustin                        7         45
+        64 Horatio                       7         35
+
+
+SQL> select sname from sailors where sid in(select sid from Reserves);
+
+SNAME
+--------------------
+Dustin
+Lubber
+Horatio
+Horatio
+
+
+SQL> select sname from sailors where sid in(select sid from reserves where bid i
+n(select bid from boats where color='red'));
+
+SNAME
+--------------------
+Dustin
+Lubber
+Horatio
+
+
+SQL> select sid, sname from sailors where sid in(select sid from reserves having
+ count(*)>1 group by sid,day);
+
+       SID SNAME
+---------- --------------------
+        22 Dustin
